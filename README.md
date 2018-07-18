@@ -1,0 +1,3 @@
+# SHELTER
+
+Simple javascript game
