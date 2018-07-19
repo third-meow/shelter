@@ -1,8 +1,8 @@
-const var DEG_TO_RAD (Math.PI / 180);
+var DEG_TO_RAD = (Math.PI / 180);
 
 function Player(init_x, init_y){
   this.img = new Image();
-  this.img.src = 'player.png';
+  this.img.src = 'player/player.png';
 
   this.x = init_x;
   this.y = init_y;
@@ -10,39 +10,56 @@ function Player(init_x, init_y){
   this.dy = 0;
 
   this.heading = 0;
-  this.dHeading = 0;
   this.movement = 0;
 
   this.specs = {
-    'speed' : 10,
-    'turn-speed' : 10,
+    'top-speed' : 1,
+    'acceleration' : 1,
+    'turn-speed' : 1,
     'health' : 10
   }
 
   this.health = this.specs['health'];
 
+  this.log = function(){
+    var logStr = '';
+    logStr += 'X :';
+    logStr += Math.round(this.x);
+    logStr += ' Y :';
+    logStr += Math.round(this.y);
+    logStr += ' Movement :'
+    logStr += this.movement;
+    console.log(logStr);
+  }
 
-  this.move(input){
-    //convert keys to dHeading, movement
-    if(input['w']){
-      this.movement += 1;
+  this.move = function(input){
+    //convert keys to heading, movement
+    if(input['w'] == true){
+      this.movement += 0.1;
     }
-    if(input['s']){
-      this.movement -= 1;
+    if(input['s'] == true){
+      this.movement -= 0.1;
     }
-    if(input['a']){
-      this.dHeading -= 1;
+    if(input['a'] == true){
+      this.heading -= Math.abs(this.movement + 1);
     }
-    if(input['d']){
-      this.dHeading += 1;
+    if(input['d'] == true){
+      this.heading += Math.abs(this.movement + 1);
     }
 
-    //apply dHeading to heading
-    this.heading += this.dHeading;
+    //apply friction
+    if(Math.abs(this.movement) <= 0.09){
+      this.movement = 0;
+    }else if(this.movement > 0.09){
+      this.movement -= 0.05;
+    }else if (this.movement < 0.09){
+      this.movement += 0.05;
+    }
 
     //convert heading, movement to dx,dy
-    this.dx += (dis * Math.sin(this.heading * DEG_TO_RAD));
-    this.dy += (dis * Math.cos(this.heading * DEG_TO_RAD));
+    this.dx = (this.movement * Math.sin(this.heading * DEG_TO_RAD));
+    this.dy = -(this.movement * Math.cos(this.heading * DEG_TO_RAD));
+
 
     //apply dx,dy to x,y
     this.x += this.dx;
@@ -65,5 +82,6 @@ function Player(init_x, init_y){
       this.move(keys);
     }
     this.draw();
+    //this.log();
   };
 }
