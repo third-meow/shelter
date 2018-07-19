@@ -13,8 +13,9 @@ function Player(init_x, init_y){
   this.movement = 0;
 
   this.specs = {
-    'top-speed' : 1,
-    'acceleration' : 1,
+    'top-speed' : 3,
+    'top-reverse-speed' : 2,
+    'acceleration' : 0.4,
     'turn-speed' : 1,
     'health' : 10
   }
@@ -34,26 +35,33 @@ function Player(init_x, init_y){
 
   this.move = function(input){
     //convert keys to heading, movement
-    if(input['w'] == true){
-      this.movement += 0.1;
+
+    if(this.movement < this.specs['top-speed']){
+      if(input['w'] == true){
+        this.movement += (0.1 * this.specs['acceleration']);
+      }
     }
-    if(input['s'] == true){
-      this.movement -= 0.1;
+
+    if(this.movement > -this.specs['top-reverse-speed']){
+      if(input['s'] == true){
+        this.movement -= (0.09 * this.specs['acceleration']);
+      }
     }
+
     if(input['a'] == true){
-      this.heading -= Math.abs(this.movement + 1);
+      this.heading -= (Math.abs(this.movement + 1) * this.specs['turn-speed']);
     }
     if(input['d'] == true){
-      this.heading += Math.abs(this.movement + 1);
+      this.heading += (Math.abs(this.movement + 1) * this.specs['turn-speed']);
     }
 
     //apply friction
-    if(Math.abs(this.movement) <= 0.09){
+    if(Math.abs(this.movement) <= 0.02){
       this.movement = 0;
-    }else if(this.movement > 0.09){
-      this.movement -= 0.05;
-    }else if (this.movement < 0.09){
-      this.movement += 0.05;
+    }else if(this.movement > 0.02){
+      this.movement -= 0.03;
+    }else if (this.movement < 0.02){
+      this.movement += 0.03;
     }
 
     //convert heading, movement to dx,dy
@@ -73,8 +81,6 @@ function Player(init_x, init_y){
     ctx.drawImage(this.img, -3, -3);
     ctx.restore();
   };
-
-
 
 
   this.update = function(keys){
