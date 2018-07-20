@@ -1,6 +1,8 @@
 var DEG_TO_RAD = (Math.PI / 180);
 
-function Player(init_x, init_y){
+function Player(ctx, init_x = 0, init_y = 0){
+  this.ctx = ctx;
+
   this.img = new Image();
   this.img.src = 'player/player.png';
 
@@ -75,11 +77,11 @@ function Player(init_x, init_y){
   };
 
   this.draw = function(){
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.heading * DEG_TO_RAD);
-    ctx.drawImage(this.img, -3, -3);
-    ctx.restore();
+    this.ctx.save();
+    this.ctx.translate(this.x, this.y);
+    this.ctx.rotate(this.heading * DEG_TO_RAD);
+    this.ctx.drawImage(this.img, -3, -3);
+    this.ctx.restore();
   };
 
 
