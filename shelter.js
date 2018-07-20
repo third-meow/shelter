@@ -44,12 +44,12 @@ function changeKey(key, state){
   game.updateKeyStates(keyStates);
 }
 
-function update(){
-  game.update();
-}
+//update game
+function update(){ game.update(); }
 
+//upon loading..
 window.onload = function(){
-  ///get canvas
+  //get canvas
   canvas = document.getElementById('mainCanvas');
 
   //setup event handlers for keyups and keydowns
@@ -61,5 +61,6 @@ window.onload = function(){
   //setup game
   game.setup();
 
-  window.setInterval(update, 50);
+  //run update
+  window.setInterval(update, 10);
 };
