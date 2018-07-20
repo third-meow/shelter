@@ -7,7 +7,7 @@ function Game(canvas){
   this.player = new Player(this.ctx, this.canvas.width/2, this.canvas.height/2);
 
   //dictonary of key states, updated upon key press/release
-  //by shelter.js via this.updateKeyStates
+  //by shelter.js via this.updateKeyStates()
   this.keyStates = {}
 
 
