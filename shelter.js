@@ -1,6 +1,8 @@
-
-//canvas and canvas context objects
+//canvas object
 var canvas;
+
+//game object
+var game;
 
 //key-state store
 keyStates = {
@@ -39,8 +41,12 @@ function changeKey(key, state){
     default:
       break;
   }
+  game.updateKeyStates(keyStates);
 }
 
+function update(){
+  game.update();
+}
 
 window.onload = function(){
   ///get canvas
@@ -51,7 +57,9 @@ window.onload = function(){
   document.onkeydown = keyDown;
 
   //create game, pass it canvas
-  var game = new Game(canvas);
-  //start game
-  game.begin();
+  game = new Game(canvas);
+  //setup game
+  game.setup();
+
+  window.setInterval(update, 50);
 };
