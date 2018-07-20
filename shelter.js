@@ -1,4 +1,3 @@
-
 const BACK_CLR = '#000000';
 const BLOCK_CLR = '#555555';
 

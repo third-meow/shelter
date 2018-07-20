@@ -1,4 +1,3 @@
-
 function Block(ctx, init_x, init_y){
   this.ctx = ctx;
 

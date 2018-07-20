@@ -1,8 +1,3 @@
-
-
-
-
-
 function Game(canvas){
   //canvas and vancas context objects
   this.canvas = canvas;

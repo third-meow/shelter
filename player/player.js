@@ -1,4 +1,3 @@
-
 function Player(ctx, init_x, init_y){
   //canvas context object
   this.ctx = ctx;
