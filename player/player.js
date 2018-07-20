@@ -1,6 +1,6 @@
 var DEG_TO_RAD = (Math.PI / 180);
 
-function Player(ctx, init_x = 0, init_y = 0){
+function Player(ctx, init_x, init_y){
   this.ctx = ctx;
 
   this.img = new Image();
