@@ -1,8 +1,17 @@
+
+const BACK_CLR = '#000000';
+const BLOCK_CLR = '#555555';
+
+const DEG_TO_RAD = (Math.PI / 180);
+
 //canvas object
 var canvas;
 
 //game object
 var game;
+
+//timer
+var t = 0;
 
 //key-state store
 keyStates = {
@@ -45,7 +54,10 @@ function changeKey(key, state){
 }
 
 //update game
-function update(){ game.update(); }
+function update(){
+  t++;
+  game.update(t);
+}
 
 //upon loading..
 window.onload = function(){

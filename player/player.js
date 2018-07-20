@@ -1,4 +1,3 @@
-var DEG_TO_RAD = (Math.PI / 180);
 
 function Player(ctx, init_x, init_y){
   //canvas context object
