@@ -18,8 +18,17 @@ function Game(canvas){
 
   //draw background
   this.background = function(){
-    this.ctx.fillStyle = '#000000';
+    this.ctx.fillStyle = BACK_CLR;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.ctx.fillStyle = BLOCK_CLR;
+    for(var h = 30; h < this.canvas.height; h += 30){
+      for(var w = 30; w < this.canvas.width; w += 30){
+        this.ctx.beginPath();
+        this.ctx.ellipse(w, h, 1, 1, 0, 0, (Math.PI * 2));
+        this.ctx.fill();
+      }
+    }
   }
 
   //run by shelter.js, upon keyState changes
