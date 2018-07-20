@@ -1,3 +1,8 @@
+
+
+
+
+
 function Game(canvas){
   //canvas and vancas context objects
   this.canvas = canvas;
@@ -23,13 +28,18 @@ function Game(canvas){
   }
 
   //run by a setInterval
-  this.update = function(){
+  this.update = function(timer){
     this.background();
     this.player.update(this.keyStates);
+    if(timer % 90 == 0){
+      this.testBlock.move();
+    }
+
   }
 
   //run once, upon page loading
   this.setup = function(){
     this.background();
+    this.testBlock = new Block(this.ctx, 30, 30);
   }
 }
