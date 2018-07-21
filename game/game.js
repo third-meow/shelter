@@ -34,10 +34,21 @@ function Game(canvas){
     this.keyStates = newKeyStates;
   }
 
+  //look after all block related stuff
   this.updateBlocks = function(){
+    //remove any blocks
+    for(var i = 0; i < this.blocks.length; i++){
+      if(this.blocks[i].atTarget == true){
+        this.blocks.splice(i, 1);
+      }
+    }
+
+
+
     if(this.blocks.length < 10){
       this.blocks.push(new Block(this.ctx, 0, 0));
-      this.blocks[this.blocks.length - 1].setCourse([((timer % 20) * 60), 0], [((timer % 20) * 60), this.canvas.height]);
+      var rand = Math.round(Math.random() * 20);
+      this.blocks[this.blocks.length - 1].setCourse([0, rand * 30], [570, rand * 30]);
     }
   }
 

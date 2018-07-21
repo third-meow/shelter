@@ -3,6 +3,7 @@ function Block(ctx, init_x, init_y){
 
   this.step = [0,0];
   this.target = [];
+  this.atTarget = false;
   this.updateTimer;
   this.drawTimer;
 
@@ -32,6 +33,7 @@ function Block(ctx, init_x, init_y){
     if(this.x == this.target[0] && this.y == this.target[1]){
       clearInterval(this.updateTimer);
       clearInterval(this.drawTimer);
+      this.atTarget = true;
     }
   }
 
