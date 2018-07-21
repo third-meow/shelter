@@ -3,7 +3,8 @@ function Block(ctx, init_x, init_y){
 
   this.step = [0,0];
   this.target = [];
-  this.atTarget = false;
+  this.updateTimer;
+  this.drawTimer;
 
   this.x = init_x;
   this.y = init_y;
@@ -29,11 +30,9 @@ function Block(ctx, init_x, init_y){
     }
 
     if(this.x == this.target[0] && this.y == this.target[1]){
-      this.atTarget = true;
+      clearInterval(this.updateTimer);
+      clearInterval(this.drawTimer);
     }
-
-    //finally draw block
-    this.draw()
   }
 
   //set course
@@ -59,6 +58,9 @@ function Block(ctx, init_x, init_y){
     }else if (this.target[1] < this.y){
       this.step[1] = -1;
     }
-  }
 
+
+    this.updateTimer = setInterval(this.update.bind(this), 90);
+    this.drawTimer = setInterval(this.draw.bind(this), 1);
+  }
 }

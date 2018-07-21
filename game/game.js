@@ -35,29 +35,9 @@ function Game(canvas){
   }
 
   this.updateBlocks = function(timer){
-    if(timer % 50 == 0){
-      //cheak all, remove any at target
-      for(var i = 0; i < this.blocks.length; i++){
-        if(this.blocks[i].atTarget == true){
-          this.blocks.splice(i, 1);
-        }
-      }
-
-      //if not full, add 1 more up to 10
-      if(this.blocks.length < 10){
-        this.blocks.push(new Block(this.ctx, 0, 0));
-        this.blocks[this.blocks.length - 1].setCourse([((timer % 20) * 60), 0], [((timer % 20) * 60), this.canvas.height]);
-      }
-
-      //update all
-      for(var i = 0; i < this.blocks.length; i++){
-        this.blocks[i].update();
-      }
-    }
-    else{
-      for(var i = 0; i < this.blocks.length; i++){
-        this.blocks[i].draw();
-      }
+    if(this.blocks.length < 10){
+      this.blocks.push(new Block(this.ctx, 0, 0));
+      this.blocks[this.blocks.length - 1].setCourse([((timer % 20) * 60), 0], [((timer % 20) * 60), this.canvas.height]);
     }
   }
 
