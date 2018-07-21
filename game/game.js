@@ -8,17 +8,18 @@ function Game(canvas){
 
   //blocks
   this.blocks = [];
+  this.block_n = 6;
 
   //dictonary of key states, updated upon key press/release
   //by shelter.js via this.updateKeyStates()
   this.keyStates = {}
 
 
-  //draw background
+  //draw background and grid
   this.background = function(){
     this.ctx.fillStyle = BACK_CLR;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
+    //draw dots every 30 px
     this.ctx.fillStyle = BLOCK_CLR;
     for(var h = 30; h < this.canvas.height; h += 30){
       for(var w = 30; w < this.canvas.width; w += 30){
@@ -29,23 +30,22 @@ function Game(canvas){
     }
   }
 
-  //run by shelter.js, upon keyState changes
+  //updates keyStates dictionary
   this.updateKeyStates = function(newKeyStates){
     this.keyStates = newKeyStates;
   }
 
   //look after all block related stuff
   this.updateBlocks = function(){
-    //remove any blocks
+    //remove any blocks that have reached their target
     for(var i = 0; i < this.blocks.length; i++){
       if(this.blocks[i].atTarget == true){
         this.blocks.splice(i, 1);
       }
     }
 
-
-
-    if(this.blocks.length < 10){
+    //add new blocks, if required
+    if(this.blocks.length < this.block_n){
       this.blocks.push(new Block(this.ctx, 0, 0));
       var rand = Math.round(Math.random() * 20);
       this.blocks[this.blocks.length - 1].setCourse([0, rand * 30], [570, rand * 30]);

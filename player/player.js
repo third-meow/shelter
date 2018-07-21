@@ -25,6 +25,8 @@ function Player(ctx, init_x, init_y){
 
   //heath points
   this.health = this.specs['health'];
+  this.dead = false;
+
 
   //prints various stats to console
   this.log = function(){
@@ -92,13 +94,11 @@ function Player(ctx, init_x, init_y){
     this.ctx.restore();
   };
 
-
   //update - move / draw / log
   this.update = function(keys){
     if(keys != undefined){
       this.move(keys);
     }
     this.draw();
-    //this.log();
   };
 }

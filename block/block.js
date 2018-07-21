@@ -4,9 +4,11 @@ function Block(ctx, init_x, init_y){
   this.step = [0,0];
   this.target = [];
   this.atTarget = false;
+  //timers
   this.updateTimer;
   this.drawTimer;
 
+  //position
   this.x = init_x;
   this.y = init_y;
 
@@ -16,6 +18,7 @@ function Block(ctx, init_x, init_y){
     this.ctx.fillRect(this.x, this.y, 30, 30);
   }
 
+  //move & draw
   this.update = function(dx, dy){
     //move one step
     this.x += (this.step[0] * 30);
