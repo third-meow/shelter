@@ -3,18 +3,18 @@ function Block(ctx, init_x, init_y){
 
   this.step = [0,0];
   this.target = [];
+  this.atTarget = false;
 
   this.x = init_x;
   this.y = init_y;
 
-  //draw block_clr'ed square on canvas at x, y
+  //draw block colour'ed square on canvas at x, y
   this.draw = function(){
     this.ctx.fillStyle = BLOCK_CLR;
     this.ctx.fillRect(this.x, this.y, 30, 30);
   }
 
-  //move towards target
-  this.move = function(dx, dy){
+  this.update = function(dx, dy){
     //move one step
     this.x += (this.step[0] * 30);
     this.y += (this.step[1] * 30);
@@ -26,6 +26,10 @@ function Block(ctx, init_x, init_y){
 
     if(this.y == this.target[1]){
       this.step[1] = 0;
+    }
+
+    if(this.x == this.target[0] && this.y == this.target[1]){
+      this.atTarget = true;
     }
 
     //finally draw block

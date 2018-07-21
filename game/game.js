@@ -3,8 +3,11 @@ function Game(canvas){
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
 
-  //player object
+  //main player
   this.player = new Player(this.ctx, this.canvas.width/2, this.canvas.height/2);
+
+  //blocks
+  this.blocks = [];
 
   //dictonary of key states, updated upon key press/release
   //by shelter.js via this.updateKeyStates()
@@ -31,19 +34,43 @@ function Game(canvas){
     this.keyStates = newKeyStates;
   }
 
+  this.updateBlocks = function(timer){
+    if(timer % 50 == 0){
+      //cheak all, remove any at target
+      for(var i = 0; i < this.blocks.length; i++){
+        if(this.blocks[i].atTarget == true){
+          this.blocks.splice(i, 1);
+        }
+      }
+
+      //if not full, add 1 more up to 10
+      if(this.blocks.length < 10){
+        this.blocks.push(new Block(this.ctx, 0, 0));
+        this.blocks[this.blocks.length - 1].setCourse([((timer % 20) * 60), 0], [((timer % 20) * 60), this.canvas.height]);
+      }
+
+      //update all
+      for(var i = 0; i < this.blocks.length; i++){
+        this.blocks[i].update();
+      }
+    }
+    else{
+      for(var i = 0; i < this.blocks.length; i++){
+        this.blocks[i].draw();
+      }
+    }
+  }
+
+
   //run by a setInterval
   this.update = function(timer){
     this.background();
     this.player.update(this.keyStates);
-    if(timer % 90 == 0){
-      this.testBlock.move();
-    }
-
+    this.updateBlocks(timer);
   }
 
   //run once, upon page loading
   this.setup = function(){
     this.background();
-    this.testBlock = new Block(this.ctx, 30, 30);
   }
 }
