@@ -34,23 +34,23 @@ function Game(canvas){
     this.keyStates = newKeyStates;
   }
 
-  this.updateBlocks = function(timer){
+  this.updateBlocks = function(){
     if(this.blocks.length < 10){
       this.blocks.push(new Block(this.ctx, 0, 0));
       this.blocks[this.blocks.length - 1].setCourse([((timer % 20) * 60), 0], [((timer % 20) * 60), this.canvas.height]);
     }
   }
 
-
   //run by a setInterval
-  this.update = function(timer){
+  this.update = function(){
     this.background();
     this.player.update(this.keyStates);
-    this.updateBlocks(timer);
+    this.updateBlocks();
   }
 
   //run once, upon page loading
   this.setup = function(){
     this.background();
+    this.updateTimer = setInterval(this.update.bind(this), 10);
   }
 }

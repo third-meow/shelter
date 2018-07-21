@@ -52,11 +52,6 @@ function changeKey(key, state){
   game.updateKeyStates(keyStates);
 }
 
-//update game
-function update(){
-  t++;
-  game.update(t);
-}
 
 //upon loading..
 window.onload = function(){
@@ -71,7 +66,4 @@ window.onload = function(){
   game = new Game(canvas);
   //setup game
   game.setup();
-
-  //run update
-  window.setInterval(update, 10);
 };
