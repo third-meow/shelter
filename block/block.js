@@ -34,10 +34,15 @@ function Block(ctx, init_x, init_y){
     }
 
     if(this.x == this.target[0] && this.y == this.target[1]){
-      clearInterval(this.updateTimer);
-      clearInterval(this.drawTimer);
+      this.stop();
       this.atTarget = true;
     }
+  }
+
+  //stop moving
+  this.stop = function(){
+    clearInterval(this.updateTimer);
+    clearInterval(this.drawTimer);
   }
 
   //set course
