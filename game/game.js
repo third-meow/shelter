@@ -35,7 +35,29 @@ function Game(canvas){
     this.keyStates = newKeyStates;
   }
 
-  //look after all block related stuff
+  //set random course for block
+  this.launchBlock = function(block){
+      switch (Math.round(Math.random() * 3)){
+        case 0:
+          var randRow = Math.round(Math.random() * 20) * 30;
+          block.setCourse([0, randRow],[570, randRow]);
+          break;
+        case 1:
+          var randCol = Math.round(Math.random() * 20) * 30;
+          block.setCourse([randCol, 0], [randCol, 570]);
+          break;
+        case 2:
+          var randRow = Math.round(Math.random() * 20) * 30;
+          block.setCourse([570, randRow],[0, randRow]);
+          break;
+        case 3:
+          var randCol = Math.round(Math.random() * 20) * 30;
+          block.setCourse([randCol, 570], [randCol, 0]);
+          break;
+      }
+  }
+
+  //look after blocks
   this.updateBlocks = function(){
     //remove any blocks that have reached their target
     for(var b = 0; b < this.blocks.length; b++){
@@ -46,14 +68,16 @@ function Game(canvas){
 
     //add new blocks, if required
     if(this.blocks.length < this.block_n){
+      //create new block
       this.blocks.push(new Block(this.ctx, 0, 0));
-      var rand = Math.round(Math.random() * 20);
-      this.blocks[this.blocks.length - 1].setCourse([0, rand * 30], [570, rand * 30]);
+      this.launchBlock(this.blocks[this.blocks.length - 1]);
     }
   }
 
-  //handler player
+  //handel player
   this.updatePlayer = function(){
+    //print players health
+    console.log(this.player.health);
     //move & draw player
     this.player.update(this.keyStates);
 
@@ -67,16 +91,11 @@ function Game(canvas){
       }
     }
 
+    //if dead..
     if(this.player.health <= 0){
       alert("You're Dead");
-      console.log(this.updateTimer);
       clearInterval(this.updateTimer);
-      for(var i = 0; i < this.blocks.length; i++){
-        this.blocks[i].stop();
-      }
     }
-
-
   }
 
   //run by a setInterval
