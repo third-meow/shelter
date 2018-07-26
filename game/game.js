@@ -38,9 +38,9 @@ function Game(canvas){
   //look after all block related stuff
   this.updateBlocks = function(){
     //remove any blocks that have reached their target
-    for(var i = 0; i < this.blocks.length; i++){
-      if(this.blocks[i].atTarget == true){
-        this.blocks.splice(i, 1);
+    for(var b = 0; b < this.blocks.length; b++){
+      if(this.blocks[b].atTarget == true){
+        this.blocks.splice(b, 1);
       }
     }
 
@@ -52,10 +52,37 @@ function Game(canvas){
     }
   }
 
+  //handler player
+  this.updatePlayer = function(){
+    //move & draw player
+    this.player.update(this.keyStates);
+
+    //cheak if player touching any blocks, if so remove health point
+    for(var b = 0; b < this.blocks.length; b++){
+      if(this.player.x >= this.blocks[b].x
+      && this.player.x <= this.blocks[b].x + 30
+      && this.player.y >= this.blocks[b].y
+      && this.player.y <= this.blocks[b].y + 30){
+        this.player.health -= 1;
+      }
+    }
+
+    if(this.player.health <= 0){
+      alert("You're Dead");
+      console.log(this.updateTimer);
+      clearInterval(this.updateTimer);
+      for(var i = 0; i < this.blocks.length; i++){
+        this.blocks[i].stop();
+      }
+    }
+
+
+  }
+
   //run by a setInterval
   this.update = function(){
     this.background();
-    this.player.update(this.keyStates);
+    this.updatePlayer();
     this.updateBlocks();
   }
 
