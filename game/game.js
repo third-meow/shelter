@@ -74,19 +74,21 @@ function Game(canvas){
     }
   }
 
-  //handel player
+  //handle player
   this.updatePlayer = function(){
-    //print players health
-    console.log(this.player.health);
     //move & draw player
     this.player.update(this.keyStates);
 
-    //cheak if player touching any blocks, if so remove health point
+
+    //check if player touching any blocks, if so remove health point
+    //and delete block
     for(var b = 0; b < this.blocks.length; b++){
       if(this.player.x >= this.blocks[b].x
       && this.player.x <= this.blocks[b].x + 30
       && this.player.y >= this.blocks[b].y
       && this.player.y <= this.blocks[b].y + 30){
+        this.blocks.splice(b, 1);
+        console.log('1 health removed')
         this.player.health -= 1;
       }
     }
