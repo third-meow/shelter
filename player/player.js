@@ -85,6 +85,18 @@ function Player(ctx, init_x, init_y){
     this.y += this.dy;
   };
 
+  this.removeHealth = function(dhp){
+    //if heath point delta is defined
+    if(dhp != undefined){
+      //remove specified health points
+      this.health -= dhp;
+    }
+    //else remove all
+    else {
+      this.health = 0;
+    }
+  }
+
   //draw image onto canvas based on position and heading
   this.draw = function(){
     this.ctx.save();
