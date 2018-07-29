@@ -88,15 +88,14 @@ function Game(canvas){
       && this.player.y >= this.blocks[b].y
       && this.player.y <= this.blocks[b].y + 30){
         this.blocks.splice(b, 1);
-        console.log('1 health removed')
-        this.player.health -= 1;
+        this.player.removeHealth(1);
       }
     }
 
     //if player touching edge, player is dead
     if(this.player.x <= 0 || this.player.x >= 600
       || this.player.y <= 0 || this.player.y >= 600){
-        this.player.health = 0;
+        this.player.removeHealth();
       }
 
     //if dead..
