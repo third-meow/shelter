@@ -91,6 +91,12 @@ function Game(canvas){
       }
     }
 
+    //if player touching edge, player is dead
+    if(this.player.x <= 0 || this.player.x >= 600
+      || this.player.y <= 0 || this.player.y >= 600){
+        this.player.health = 0;
+      }
+
     //if dead..
     if(this.player.health <= 0){
       alert("You're Dead");
