@@ -95,6 +95,8 @@ function Player(ctx, init_x, init_y){
     else {
       this.health = 0;
     }
+    this.img.src = 'player/hurt_player.png';
+    setTimeout(function(){this.img.src = 'player/player.png';}.bind(this), 600);
   }
 
   //draw image onto canvas based on position and heading
