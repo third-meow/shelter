@@ -14,6 +14,9 @@ function Player(ctx, init_x, init_y){
   this.heading = 0;
   this.movement = 0;
 
+  //resources
+  this.resources = [];
+
   //specs of player
   this.specs = {
     'top-speed' : 3,

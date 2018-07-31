@@ -8,9 +8,14 @@ function Game(canvas){
   //main player
   this.player = new Player(this.ctx, this.width/2, this.height/2);
 
+  //resources
+  this.resources = []
+  this.max_resource_n = 2;
+
+
   //blocks
   this.blocks = [];
-  this.block_n = 6;
+  this.max_block_n = 3;
 
   //dictonary of key states, updated upon key press/release
   //by shelter.js via this.updateKeyStates()
@@ -69,10 +74,23 @@ function Game(canvas){
     }
 
     //add new blocks, if required
-    if(this.blocks.length < this.block_n){
+    if(this.blocks.length < this.max_block_n){
       //create new block
       this.blocks.push(new Block(this.ctx, 0, 0));
       this.launchBlock(this.blocks[this.blocks.length - 1]);
+    }
+  }
+
+  //handle resources
+  this.updateResources = function(){
+    if(this.resources.length < this.max_resource_n){
+      if(Math.random() >= 0.995){
+        this.resources.push(new Resource(this.ctx))
+      }
+    }
+
+    for(var r = 0; r < this.resources.length; r++){
+      this.resources[r].draw();
     }
   }
 
@@ -94,6 +112,16 @@ function Game(canvas){
       }
     }
 
+    //check if player touching any resources, if so give to player
+    for(var r = 0; r < this.resources.length; r++){
+      if(this.player.x >= this.resources[r].x
+      && this.player.x <= this.resources[r].x + 30
+      && this.player.y >= this.resources[r].y
+      && this.player.y <= this.resources[r].y + 30){
+        //give resource to player
+        this.player.resources.push(this.resources.splice(r, 1)[0]);
+      }
+    }
     //if player touching edge, player is dead
     if(this.player.x <= 0 || this.player.x >= 600
       || this.player.y <= 0 || this.player.y >= 600){
@@ -112,6 +140,7 @@ function Game(canvas){
     this.background();
     this.updatePlayer();
     this.updateBlocks();
+    this.updateResources();
   }
 
   //run once, upon page loading
