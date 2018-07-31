@@ -20,7 +20,7 @@ function Player(ctx, init_x, init_y){
     'top-reverse-speed' : 2,
     'acceleration' : 0.4,
     'turn-speed' : 1,
-    'health' : 4
+    'health' : 5
   }
 
   //heath points
@@ -115,9 +115,9 @@ function Player(ctx, init_x, init_y){
     this.ctx.save();
     this.ctx.translate(610, 0);
     this.ctx.fillStyle = BACK_CLR;
-    this.ctx.fillRect(0, 0, 50, 600);
+    this.ctx.fillRect(0, 0, 50, 300);
     this.ctx.fillStyle = HEALTH_DISPLAY_CLR;
-    this.ctx.fillRect(0, 0, 50, this.health * 20);
+    this.ctx.fillRect(0, 0, 50, this.health * 40);
     this.ctx.restore();
   }
 
