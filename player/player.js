@@ -20,7 +20,7 @@ function Player(ctx, init_x, init_y){
     'top-reverse-speed' : 2,
     'acceleration' : 0.4,
     'turn-speed' : 1,
-    'health' : 10
+    'health' : 4
   }
 
   //heath points
@@ -97,6 +97,8 @@ function Player(ctx, init_x, init_y){
     }
     this.img.src = 'player/hurt_player.png';
     setTimeout(function(){this.img.src = 'player/player.png';}.bind(this), 600);
+
+    this.displayHealth();
   }
 
   //draw image onto canvas based on position and heading
@@ -108,11 +110,23 @@ function Player(ctx, init_x, init_y){
     this.ctx.restore();
   };
 
-  //update - move / draw / log
+  //draw representation of health level
+  this.displayHealth = function(){
+    this.ctx.save();
+    this.ctx.translate(610, 0);
+    this.ctx.fillStyle = BACK_CLR;
+    this.ctx.fillRect(0, 0, 50, 600);
+    this.ctx.fillStyle = HEALTH_DISPLAY_CLR;
+    this.ctx.fillRect(0, 0, 50, this.health * 20);
+    this.ctx.restore();
+  }
+
+  //update - move / draw / display
   this.update = function(keys){
     if(keys != undefined){
       this.move(keys);
     }
     this.draw();
+    this.displayHealth();
   };
 }

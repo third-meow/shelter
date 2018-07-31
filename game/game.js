@@ -2,9 +2,11 @@ function Game(canvas){
   //canvas and vancas context objects
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
+  this.width = this.canvas.width - 60;
+  this.height = this.canvas.height;
 
   //main player
-  this.player = new Player(this.ctx, this.canvas.width/2, this.canvas.height/2);
+  this.player = new Player(this.ctx, this.width/2, this.height/2);
 
   //blocks
   this.blocks = [];
@@ -18,11 +20,11 @@ function Game(canvas){
   //draw background and grid
   this.background = function(){
     this.ctx.fillStyle = BACK_CLR;
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillRect(0, 0, this.width, this.height);
     //draw dots every 30 px
     this.ctx.fillStyle = BLOCK_CLR;
-    for(var h = 30; h < this.canvas.height; h += 30){
-      for(var w = 30; w < this.canvas.width; w += 30){
+    for(var h = 30; h < this.height; h += 30){
+      for(var w = 30; w < this.width; w += 30){
         this.ctx.beginPath();
         this.ctx.ellipse(w, h, 1, 1, 0, 0, (Math.PI * 2));
         this.ctx.fill();

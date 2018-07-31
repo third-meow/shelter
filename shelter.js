@@ -1,5 +1,6 @@
 const BACK_CLR = '#000000';
 const BLOCK_CLR = '#555555';
+const HEALTH_DISPLAY_CLR = '#FF1111';
 
 const DEG_TO_RAD = (Math.PI / 180);
 
