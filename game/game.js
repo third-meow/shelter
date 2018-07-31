@@ -41,19 +41,19 @@ function Game(canvas){
   this.launchBlock = function(block){
       switch (Math.round(Math.random() * 3)){
         case 0:
-          var randRow = Math.round(Math.random() * 20) * 30;
+          var randRow = Math.round(Math.random() * 19) * 30;
           block.setCourse([0, randRow],[570, randRow]);
           break;
         case 1:
-          var randCol = Math.round(Math.random() * 20) * 30;
+          var randCol = Math.round(Math.random() * 19) * 30;
           block.setCourse([randCol, 0], [randCol, 570]);
           break;
         case 2:
-          var randRow = Math.round(Math.random() * 20) * 30;
+          var randRow = Math.round(Math.random() * 19) * 30;
           block.setCourse([570, randRow],[0, randRow]);
           break;
         case 3:
-          var randCol = Math.round(Math.random() * 20) * 30;
+          var randCol = Math.round(Math.random() * 19) * 30;
           block.setCourse([randCol, 570], [randCol, 0]);
           break;
       }
