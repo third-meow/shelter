@@ -45,6 +45,27 @@ function Block(ctx, init_x, init_y){
     clearInterval(this.drawTimer);
   }
 
+  //start random course
+  this.launch = function(){
+    switch (Math.round(Math.random() * 3)){
+        case 0:
+          var randRow = Math.round(Math.random() * 19) * 30;
+          this.setCourse([0, randRow],[570, randRow]);
+          break;
+        case 1:
+          var randCol = Math.round(Math.random() * 19) * 30;
+          this.setCourse([randCol, 0], [randCol, 570]);
+          break;
+        case 2:
+          var randRow = Math.round(Math.random() * 19) * 30;
+          this.setCourse([570, randRow],[0, randRow]);
+          break;
+        case 3:
+          var randCol = Math.round(Math.random() * 19) * 30;
+          this.setCourse([randCol, 570], [randCol, 0]);
+          break;
+      }
+  }
   //set course
   this.setCourse = function(start, end){
     //move to start

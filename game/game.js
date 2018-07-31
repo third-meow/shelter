@@ -42,28 +42,6 @@ function Game(canvas){
     this.keyStates = newKeyStates;
   }
 
-  //set random course for block
-  this.launchBlock = function(block){
-      switch (Math.round(Math.random() * 3)){
-        case 0:
-          var randRow = Math.round(Math.random() * 19) * 30;
-          block.setCourse([0, randRow],[570, randRow]);
-          break;
-        case 1:
-          var randCol = Math.round(Math.random() * 19) * 30;
-          block.setCourse([randCol, 0], [randCol, 570]);
-          break;
-        case 2:
-          var randRow = Math.round(Math.random() * 19) * 30;
-          block.setCourse([570, randRow],[0, randRow]);
-          break;
-        case 3:
-          var randCol = Math.round(Math.random() * 19) * 30;
-          block.setCourse([randCol, 570], [randCol, 0]);
-          break;
-      }
-  }
-
   //look after blocks
   this.updateBlocks = function(){
     //remove any blocks that have reached their target
@@ -77,7 +55,7 @@ function Game(canvas){
     if(this.blocks.length < this.max_block_n){
       //create new block
       this.blocks.push(new Block(this.ctx, 0, 0));
-      this.launchBlock(this.blocks[this.blocks.length - 1]);
+      this.blocks[this.blocks.length - 1].launch();
     }
   }
 
