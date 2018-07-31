@@ -12,7 +12,6 @@ function Game(canvas){
   this.resources = []
   this.max_resource_n = 2;
 
-
   //blocks
   this.blocks = [];
   this.max_block_n = 3;
