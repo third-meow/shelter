@@ -43,9 +43,19 @@ function Game(canvas){
 
   //look after blocks
   this.updateBlocks = function(){
-    //remove any blocks that have reached their target
+    //remove any blocks that have reached their target or are touching a wall
     for(var b = 0; b < this.blocks.length; b++){
+      for(var w = 0; w < this.player.walls.length; w++){
+        if(this.player.walls[w].x == this.blocks[b].x
+          &&this.player.walls[w].y == this.blocks[b].y){
+            this.blocks[b].atTarget = true;
+            break;
+          }
+      }
+
       if(this.blocks[b].atTarget == true){
+        clearInterval(this.blocks[b].drawTimer);
+        clearInterval(this.blocks[b].updateTimer);
         this.blocks.splice(b, 1);
       }
     }
@@ -95,8 +105,11 @@ function Game(canvas){
       && this.player.x <= this.resources[r].x + 30
       && this.player.y >= this.resources[r].y
       && this.player.y <= this.resources[r].y + 30){
-        //give resource to player
-        this.player.resources.push(this.resources.splice(r, 1)[0]);
+        //if player has less than 5 resources already
+        if(this.player.resources.length < 5){
+          //give resource to player
+          this.player.resources.push(this.resources.splice(r, 1)[0]);
+        }
       }
     }
     //if player touching edge, player is dead

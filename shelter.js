@@ -1,6 +1,8 @@
 const BACK_CLR = '#000000';
 const BLOCK_CLR = '#555555';
+const WALL_CLR = '#663333';
 const HEALTH_DISPLAY_CLR = '#FF1111';
+const RESOURCE_DISPLAY_CLR = '#1111FF';
 
 const DEG_TO_RAD = (Math.PI / 180);
 

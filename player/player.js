@@ -16,6 +16,8 @@ function Player(ctx, init_x, init_y){
 
   //resources
   this.resources = [];
+  //walls
+  this.walls = [];
 
   //specs of player
   this.specs = {
@@ -88,6 +90,7 @@ function Player(ctx, init_x, init_y){
     this.y += this.dy;
   };
 
+  //remove health points
   this.removeHealth = function(dhp){
     //if heath point delta is defined
     if(dhp != undefined){
@@ -98,14 +101,33 @@ function Player(ctx, init_x, init_y){
     else {
       this.health = 0;
     }
+
+    //change img for 600ms
     this.img.src = 'player/hurt_player.png';
     setTimeout(function(){this.img.src = 'player/player.png';}.bind(this), 600);
 
     this.displayHealth();
   }
 
+  this.buildWall = function(){
+    if(this.resources.length >= 5){
+      for(var i = 0; i < 5; i++){
+        this.resources.pop();
+      }
+      this.walls.push(new Wall(this.ctx, (this.x - (this.x % 30)),
+        (this.y - (this.y % 30))));
+
+      //increase health by 2
+      this.health += 2;
+    }
+  }
+
   //draw image onto canvas based on position and heading
   this.draw = function(){
+    for(var w = 0; w < this.walls.length; w++){
+      this.walls[w].draw();
+    }
+
     this.ctx.save();
     this.ctx.translate(this.x, this.y);
     this.ctx.rotate(this.heading * DEG_TO_RAD);
@@ -124,12 +146,28 @@ function Player(ctx, init_x, init_y){
     this.ctx.restore();
   }
 
+  //draw representation of resources
+  this.displayResources = function(){
+    this.ctx.save();
+    this.ctx.translate(610, 300);
+    this.ctx.fillStyle = BACK_CLR;
+    this.ctx.fillRect(0, 0, 50, 300);
+    this.ctx.fillStyle = RESOURCE_DISPLAY_CLR;
+    this.ctx.fillRect(0, (300 - (this.resources.length * 60)), 50,
+      this.resources.length * 60);
+    this.ctx.restore();
+  }
+
   //update - move / draw / display
   this.update = function(keys){
     if(keys != undefined){
       this.move(keys);
+      if(keys['f']){
+        this.buildWall();
+      }
     }
     this.draw();
     this.displayHealth();
+    this.displayResources();
   };
 }
