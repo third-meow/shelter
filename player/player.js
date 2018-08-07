@@ -21,11 +21,11 @@ function Player(ctx, init_x, init_y){
 
   //specs of player
   this.specs = {
-    'top-speed' : 3,
+    'top-speed' : 2.7,
     'top-reverse-speed' : 2,
-    'acceleration' : 0.4,
+    'acceleration' : 0.5,
     'turn-speed' : 1,
-    'health' : 5
+    'health' : 6
   }
 
   //heath points

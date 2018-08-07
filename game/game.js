@@ -14,7 +14,7 @@ function Game(canvas){
 
   //blocks
   this.blocks = [];
-  this.max_block_n = 3;
+  this.max_block_n = 2;
 
   //dictonary of key states, updated upon key press/release
   //by shelter.js via this.updateKeyStates()
